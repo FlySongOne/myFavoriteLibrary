@@ -25,14 +25,15 @@ services:
       environment:
         - GRADLE_USER_HOME=cache
         - SPRING_PROFILES_ACTIVE=dev
-  users-api:
+  libraries-api:
         image: anapsix/alpine-java:8_jdk_unlimited
         ports:
           - '8081:8081'
-        working_dir: /users-api
+        working_dir: /libraries-api
         volumes:
-          - ./users-api:/users-api:cached
+          - ./libraries-api:/libraries-api:cached
         depends_on:
+          - eureka
           - postgresdev
         command: './gradlew bootRun'
         environment:
