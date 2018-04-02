@@ -49,6 +49,22 @@ public class LibrariesController {
         return libraryRepository.save(newLibrary);
     }
 
+    @PatchMapping("/{libraryId}")
+    public Library updateUserById(@PathVariable Long libraryId, @RequestBody Library libraryRequest) throws NotFoundException {
+        Library libraryFromDb = libraryRepository.findOne(libraryId);
+
+        if (libraryFromDb == null) {
+            throw new NotFoundException("Library with ID of " + libraryId + " was not found!");
+        }
+
+        libraryFromDb.setName(libraryRequest.getName());
+        libraryFromDb.setAddress(libraryRequest.getAddress());
+        libraryFromDb.setCity(libraryRequest.getCity());
+        libraryFromDb.setPostalCode(libraryRequest.getPostalCode());
+
+        return libraryRepository.save(libraryFromDb);
+    }
+
     @ExceptionHandler
     void handleLibraryNotFound(
             NotFoundException exception,

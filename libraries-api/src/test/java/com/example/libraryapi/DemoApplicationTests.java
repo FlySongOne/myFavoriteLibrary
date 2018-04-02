@@ -1,4 +1,4 @@
-package com.example.usersapi;
+package com.example.libraryapi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

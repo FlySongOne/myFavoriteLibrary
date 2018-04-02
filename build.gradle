@@ -56,19 +56,19 @@ dependencies {
 
 }
 
-task waitForUsersAPI(type: Exec) {
-	commandLine './wait-for-api.sh','http://localhost:8080/users', 'Users API'
+task waitForLibrariesAPI(type: Exec) {
+	commandLine './wait-for-api.sh','http://localhost:8080/libraries', 'Libraries API'
 }
 
-task runUsersAPITests(type: Exec) {
-	workingDir './users-api'
+task runLibrariesAPITests(type: Exec) {
+	workingDir './libraries-api'
 	commandLine './gradlew', 'test'
 }
 
 task allTests(type: Test) {
 	dependsOn cleanTest
-	dependsOn waitForUsersAPI
-	dependsOn runUsersAPITests
+	dependsOn waitForLibrariesAPI
+	dependsOn runLibrariesAPITests
 
 	testLogging {
 		exceptionFormat "full"
@@ -79,7 +79,7 @@ task allTests(type: Test) {
 
 test {
 	dependsOn cleanTest
-	dependsOn waitForUsersAPI
+	dependsOn waitForLibrariesAPI
 
 	testLogging {
 		exceptionFormat "full"
